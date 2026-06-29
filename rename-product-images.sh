@@ -137,7 +137,7 @@ echo ""
 
 prompt "Brand      e.g. project-321" BRAND
 prompt "Model      e.g. RG3"         MODEL
-prompt "Options    e.g. centerlock  (leave blank to omit)" OPTIONS
+prompt "Options    e.g. centerlock (leave blank to omit)" OPTIONS
 prompt "Size       e.g. large | thumbnail" SIZE "large"
 prompt "Resolution e.g. 1200x1200" RESOLUTION "1200x1200"
 
@@ -154,7 +154,7 @@ echo -e "  ${BOLD}b)${RESET} Custom      — you type a suffix for each file (e.
 echo -ne "\n  Choose [a/b]: "
 read -r MODE_CHOICE
 
-case "${MODE_CHOICE,,}" in
+case "$(echo "$MODE_CHOICE" | tr '[:upper:]' '[:lower:]')" in
   b|custom) MODE="custom" ;;
   *)        MODE="index"  ;;
 esac
@@ -203,7 +203,7 @@ fi
 echo -ne "\n  ${BOLD}Rename ${#RENAME_MAP[@]} file(s)? [y/N]:${RESET} "
 read -r CONFIRM
 
-if [[ "${CONFIRM,,}" != "y" ]]; then
+if [[ "$(echo "$CONFIRM" | tr '[:upper:]' '[:lower:]')" != "y" ]]; then
   print_warn "Aborted — no files were renamed."
   exit 0
 fi
